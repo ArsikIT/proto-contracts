@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package payment.v1;
+
+option go_package = "github.com/<your-user>/generated-proto-go/payment/v1;paymentv1";
+
+import "google/protobuf/timestamp.proto";
+
+service PaymentService {
+  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse);
+}
+
+message ProcessPaymentRequest {
+  string order_id = 1;
+  string user_id = 2;
+  double amount = 3;
+  string currency = 4;
+  string payment_method = 5;
+}
+
+message ProcessPaymentResponse {
+  string payment_id = 1;
+  string order_id = 2;
+  string status = 3;
+  string transaction_id = 4;
+  string message = 5;
+  google.protobuf.Timestamp processed_at = 6;
+}
